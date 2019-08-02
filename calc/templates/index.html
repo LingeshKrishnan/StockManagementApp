@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="button-group" >
+
+    <a href="{% url 'displayNighty' %}" class="btn-primary btn-lg" role="button">Nighty</a>
+    <a href="{% url 'addNighty' %}" class="btn-warning btn-sm" role="button">+</a>
+
+    <a href="{% url 'displayInskirt' %}" class="btn-primary btn-lg" role="button">Inskirt</a>
+    <a href="{% url 'addInskirt' %}" class="btn-warning btn-sm" role="button">+</a>
+
+    <a href="{% url 'displayBlouse' %}" class="btn-primary btn-lg" role="button">Blouse</a>
+    <a href="{% url 'addBlouse' %}" class="btn-warning btn-sm" role="button">+</a>
+
+    <a href="{% url 'displaySaree' %}" class="btn-primary btn-lg" role="button">Saree</a>
+    <a href="{% url 'addSaree' %}" class="btn-warning btn-sm" role="button">+</a>
+
+
+</div>
+<br>
+
+<h4>Currently Viewing {{ header }}</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>Model</td>
+            <td>Price</td>
+            <td>Status</td>
+            <td>Issues</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+
+        <tr>
+
+            <td>{{ item.pk }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.issues }}</td>
+            {% if header == "Nighty" %}
+            <td>
+                <a href="{% url 'editNighty' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                <a href="{% url 'deleteNighty' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+            </td>
+
+            {% elif header == "Inskirt" %}
+            <td>
+                <a href="{% url 'editInskirt' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                <a href="{% url 'deleteInskirt' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+            </td>
+
+            {% elif header == "Blouse" %}
+            <td>
+                <a href="{% url 'editBlouse' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                <a href="{% url 'deleteBlouse' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+            </td>
+
+            {% else %}
+            <td>
+                <a href="{% url 'editSaree' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                <a href="{% url 'deleteSaree' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+            </td>
+            {% endif %}
+
+        </tr>
+
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
